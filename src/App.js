@@ -1,21 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
+import TransactionEntry from "./Components/TransactionEntry/TransactionEntry.js";
+import TransactionLog from "./Components/TransactionLog/TransactionLog.js";
+import DisplaySnapshot from "./Components/DisplaySnapshot/DisplaySnapshot.js";
+import DisplayHistory from "./Components/DisplayHistory/DisplayHistory.js";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+class App extends React.Component {
+    render() {
+    	return (
+			<BrowserRouter>
+				<div className="App container">
+					<div className="dataentry" ><TransactionEntry /></div>
+					<div className="log" ><TransactionLog /></div>
+					<div className="snapshot col-xs-12 col-sm-6" ><DisplaySnapshot /></div>
+					<div className="history col-xs-12 col-sm-6" ><DisplayHistory /></div>
+				</div>
+			</BrowserRouter>
+		);
+	}
 }
 
 export default App;

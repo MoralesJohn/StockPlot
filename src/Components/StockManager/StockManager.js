@@ -30,14 +30,15 @@ class StockManager extends React.Component {
             }
         ]
         let log = []
-        if (log == []) {
+        if (log.length == 0) {
             log = defaultLog;
         }
+        console.log("starting log", log);
         this.state = {log: log};
     }
     addLogEntry = (newEntry) => {
         let updatedLog = this.state.log;
-        updatedLog += newEntry;
+        updatedLog.push(newEntry);
         console.log(updatedLog);
         this.setState({log: updatedLog});
     }

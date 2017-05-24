@@ -17,8 +17,8 @@ class TransactionEntry extends React.Component {
         let newEntry = {
             symbol: this.state.symbol,
             date: this.state.date,
-            quantity: this.state.quantity,
-            price: this.state.price,
+            quantity: Number(this.state.quantity),
+            price: Number(this.state.price),
             type: this.state.type
         }
         console.log(newEntry);

@@ -9,13 +9,12 @@ class TransactionLog extends React.Component {
             let stockList = Object.keys(log);
             let logArr = [];
             stockList.forEach(function(stock) {
-                console.log(stock);
-                
                 let transaction = log[stock].transactions.map((entry, ndx) => {
                     return <TransactionItem entry={entry} key={ndx} />
                 });
                 logArr.push(transaction);
             })
+            console.log(this.props.log);
             
             return(
                 <div className="col-xs-12" >

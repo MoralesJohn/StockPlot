@@ -71,12 +71,39 @@ class StockManager extends React.Component {
     //         }
     //     })
     // }
-    // addLogEntry = (newEntry) => {
-    //     let updatedLog = this.state.log;
-    //     updatedLog.push(newEntry);
-    //     console.log(updatedLog);
-    //     this.setState({log: updatedLog});
-    // }
+    addLogEntry = (newEntry) => {
+        let updatedLog = this.state.log;
+        let stockList = Object.keys(updatedLog);
+        if (stockList.indexOf(newEntry.symbol) >= 0) {
+            if (newEntry.type == "Buy") {
+                updatedLog[newEntry.symbol].netQty += newEntry.quantity;
+                updatedLog[newEntry.symbol].transactions.push(newEntry);
+                this.setState({log: updatedLog});
+            } else {
+                if (newEntry.quantity < updatedLog[newEntry.symbol].netQty) {
+                    updatedLog[newEntry.symbol].netQty -= newEntry.quantity;
+                    updatedLog[newEntry.symbol].transactions.push(newEntry);
+                    this.setState({log: updatedLog});
+                } else {
+                    console.log(newEntry.quantity, updatedLog[newEntry.symbol].netQty)
+                    alert("You cannot sell more than you own");
+                    return
+                }
+            }
+        } else {
+            if (newEntry.type == "Sell") {
+                alert("You cannot sell stock you do not own");
+                return
+            } else {
+                updatedLog[newEntry.symbol] = {
+                    netQty: newEntry.quantity,
+                    transactions: [newEntry]
+                }
+            }
+            this.setState({log: updatedLog})
+        }
+
+    }
     render() {
     	return (
             <div className="App container">

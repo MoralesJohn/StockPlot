@@ -4,6 +4,7 @@ import TransactionEntry from "../TransactionEntry/TransactionEntry.js";
 import TransactionLog from "../TransactionLog/TransactionLog.js";
 import DisplaySnapshot from "../DisplaySnapshot/DisplaySnapshot.js";
 import DisplayHistory from "../DisplayHistory/DisplayHistory.js";
+import {CSVLink} from 'react-csv';
 
 class StockManager extends React.Component {
     constructor(props){
@@ -47,7 +48,7 @@ class StockManager extends React.Component {
             }
         };
         let log = {}
-        if (Object.keys(log).length == 0) {
+        if (Object.keys(log).length === 0) {
             log = defaultLog;
         }
         console.log("starting log", log);
@@ -81,6 +82,11 @@ class StockManager extends React.Component {
             <div className="App container">
                 <div className="dataentry" ><TransactionEntry addLogEntry={this.addLogEntry}/></div>
                 <div className="log" ><TransactionLog log={this.state.log} view={this.state.view}/></div>
+                { /*// <div className="exportdata col-sm-offset-9">
+                //     {Object.keys(this.state.log).length > 0 &&
+                //         <div className="csvlink"><CSVLink data={this.state.log}>Download Report</CSVLink></div>
+                //     }
+                // </div> */ }
                 <div className="snapshot col-xs-12 col-sm-6" ><DisplaySnapshot /></div>
                 <div className="history col-xs-12 col-sm-6" ><DisplayHistory /></div>
             </div>

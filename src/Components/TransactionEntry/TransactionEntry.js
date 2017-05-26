@@ -15,7 +15,7 @@ class TransactionEntry extends React.Component {
     newTransaction = (e) => {
         e.preventDefault();
         let newEntry = {
-            symbol: this.state.symbol,
+            symbol: this.state.symbol.toUpperCase(),
             date: this.state.date,
             quantity: Number(this.state.quantity),
             price: Number(this.state.price),

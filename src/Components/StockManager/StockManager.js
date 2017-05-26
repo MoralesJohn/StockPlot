@@ -10,36 +10,36 @@ class StockManager extends React.Component {
     constructor(props){
         super(props);
         let defaultLog = {
-            msft: { 
+            MSFT: { 
                 netQty: 200, 
                 transactions: [{
-                    symbol: "msft",
+                    symbol: "MSFT",
                     price: 63.17,
                     date: "2017-02-02",
                     quantity: 300,
                     type: "Buy"
                 }, {
-                    symbol: "msft",
+                    symbol: "MSFT",
                     price: 64.02,
                     date: "2017-02-19",
                     quantity: 100,
                     type: "Sell"
                 }]
             }, 
-            f: {
+            F: {
                 netQty: 1100,
                 transactions: [{
-                    symbol: "f",
+                    symbol: "F",
                     price: 12.53,
                     date: "2017-02-28",
                     quantity: 1100,
                     type: "Buy"
                 }]
             },
-            has: {
+            HAS: {
                 netQty: 40,
                 transactions: [{
-                    symbol: "has",
+                    symbol: "HAS",
                     price: 76.16,
                     date: "2016-10-14",
                     quantity: 40,
@@ -55,7 +55,8 @@ class StockManager extends React.Component {
         this.state = {
             log: log,
             view: "stock"
-        };
+        }
+
     }
     // buildSummary(log){
     //     // summary format {symbol1: [[qty, price], [qty, price]], symbol2: [[qty, price], ...], ...}
@@ -75,7 +76,7 @@ class StockManager extends React.Component {
         let updatedLog = this.state.log;
         let stockList = Object.keys(updatedLog);
         if (stockList.indexOf(newEntry.symbol) >= 0) {
-            if (newEntry.type == "Buy") {
+            if (newEntry.type === "Buy") {
                 updatedLog[newEntry.symbol].netQty += newEntry.quantity;
                 updatedLog[newEntry.symbol].transactions.push(newEntry);
                 this.setState({log: updatedLog});
@@ -91,7 +92,7 @@ class StockManager extends React.Component {
                 }
             }
         } else {
-            if (newEntry.type == "Sell") {
+            if (newEntry.type === "Sell") {
                 alert("You cannot sell stock you do not own");
                 return
             } else {
@@ -105,15 +106,25 @@ class StockManager extends React.Component {
 
     }
     render() {
+        let logArr = [];
+        if (Object.keys(this.state.log).length > 0) {
+            Object.keys(this.state.log).forEach((symbol) => {
+                this.state.log[symbol].transactions.forEach((transaction) => {
+                    logArr.push(transaction);
+                });
+            });
+        }
+
+        console.log("logArr", logArr);
     	return (
             <div className="App container">
                 <div className="dataentry" ><TransactionEntry addLogEntry={this.addLogEntry}/></div>
-                <div className="log" ><TransactionLog log={this.state.log} view={this.state.view}/></div>
-                { /*// <div className="exportdata col-sm-offset-9">
-                //     {Object.keys(this.state.log).length > 0 &&
-                //         <div className="csvlink"><CSVLink data={this.state.log}>Download Report</CSVLink></div>
-                //     }
-                // </div> */ }
+                <div className="log" ><TransactionLog log={this.state.log} logArr={logArr} view={this.state.view}/></div>
+                <div className="exportdata col-sm-offset-9">
+                     {logArr.length > 0 &&
+                         <div className="csvlink"><CSVLink data={logArr}>Download Report</CSVLink></div>
+                     }
+                </div>
                 <div className="snapshot col-xs-12 col-sm-6" ><DisplaySnapshot /></div>
                 <div className="history col-xs-12 col-sm-6" ><DisplayHistory /></div>
             </div>

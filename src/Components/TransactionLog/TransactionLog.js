@@ -1,38 +1,26 @@
 import React from "react";
 import "./TransactionLog.css";
-import TransactionItem from "./TransactionItem.js";
+import Reactable from "reactable";
 
 class TransactionLog extends React.Component {
     render(){
-        if (this.props.view == "stock") {
-            let log = this.props.log;
-            let stockList = Object.keys(log);
-            let logArr = [];
-            stockList.forEach(function(stock) {
-                let transaction = log[stock].transactions.map((entry, ndx) => {
-                    return <TransactionItem entry={entry} key={ndx} />
-                });
-                logArr.push(transaction);
-            })
-            console.log(this.props.log);
-            
+        if (this.props.view === "stock") {
+            let Table = Reactable.Table; 
             return(
                 <div className="col-xs-12" >
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Stock</th>
-                                    <th>Buy/Sell</th>
-                                    <th>Qty</th>
-                                    <th>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {logArr}
-                            </tbody>
-                        </table>
+                    <Table className="table" sortable={true} data={this.props.logArr} />
+                    {/*
+                    <div id="table"></div>
+                            <Thead>
+                                    <Th>Date</Th>
+                                    <Th>Stock</Th>
+                                    <Th>Buy/Sell</Th>
+                                    <Th>Qty</Th>
+                                    <Th>Price</Th>
+                            </Thead>
                     </div>
+                    */}
+                </div>
             )
         } else {
             return (<h2>else</h2>);

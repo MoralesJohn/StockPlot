@@ -22,6 +22,13 @@ class TransactionEntry extends React.Component {
             type: this.state.type
         }
         console.log(newEntry);
+        this.setState({
+            symbol: "",
+            date: "",
+            quantity: 0,
+            price: 0,
+            type: "Buy"
+        })
         this.props.addLogEntry(newEntry);
     }
     handleChange = (e) => {

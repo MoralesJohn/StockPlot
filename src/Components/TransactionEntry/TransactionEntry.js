@@ -39,8 +39,8 @@ class TransactionEntry extends React.Component {
     render(){
         return(
             <div>
-                <form className="form-inline" onSubmit={this.newTransaction} >
-                    <div className="col-sm-12" >
+                <form className="form" onSubmit={this.newTransaction} >
+                    <div className="col-sm-4 col-md-2" >
                         <label htmlFor="symbol" >Stock:</label>
                         <input 
                             type="text" 
@@ -48,6 +48,8 @@ class TransactionEntry extends React.Component {
                             name="symbol" 
                             onChange={this.handleChange}
                             value={this.state.symbol}/>
+                    </div>
+                    <div className="col-sm-4 col-md-2" >
                         <label htmlFor="quantity" >Quantity:</label>
                         <input 
                             type="number" 
@@ -57,6 +59,8 @@ class TransactionEntry extends React.Component {
                             value={this.state.quantity}
                             step="1" 
                             min="1" />
+                    </div>
+                    <div className="col-sm-4 col-md-2" >
                         <label htmlFor="price" >Price:</label>
                         <input 
                             type="number" 
@@ -67,13 +71,15 @@ class TransactionEntry extends React.Component {
                             step="0.001" 
                             min="0" />
                     </div>
-                    <div className="col-sm-12" >
+                    <div className="col-sm-4 col-md-2" >
                         <label htmlFor="date" >Date:</label>
                         <input 
                             type="date" 
                             className="form-control" name="date" 
                             onChange={this.handleChange}
                             value={this.state.date} />
+                    </div>
+                    <div className="col-sm-4 col-md-2" >
                         <label htmlFor="type" >Type:</label>
                         <select 
                             name="type" 
@@ -83,6 +89,8 @@ class TransactionEntry extends React.Component {
                             <option>Buy</option>
                             <option>Sell</option>
                         </select> 
+                    </div>
+                    <div className="submitDiv col-sm-4 col-md-2" >
                         <button type="submit" className="btn btn-default">Submit</button>
                     </div>
                 </form>

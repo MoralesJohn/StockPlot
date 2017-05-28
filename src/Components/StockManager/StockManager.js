@@ -119,12 +119,12 @@ class StockManager extends React.Component {
     	return (
             <div className="App container">
                 <div className="dataentry" ><TransactionEntry addLogEntry={this.addLogEntry}/></div>
-                <div className="log" ><TransactionLog log={this.state.log} logArr={logArr} view={this.state.view}/></div>
-                <div className="exportdata col-sm-offset-9">
+                <div className="exportdata col-md-2 col-md-offset-9">
                      {logArr.length > 0 &&
                          <div className="csvlink"><CSVLink data={logArr}>Download Report</CSVLink></div>
                      }
                 </div>
+                <div className="log" ><TransactionLog log={this.state.log} logArr={logArr} view={this.state.view}/></div>
                 <div className="snapshot col-xs-12 col-sm-6" ><DisplaySnapshot /></div>
                 <div className="history col-xs-12 col-sm-6" ><DisplayHistory /></div>
             </div>
